@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {"report-Apr-30-2025-to-May-26-2025.csv":false};
-        var gk_fileData = {"report-Apr-30-2025-to-May-26-2025.csv":"\"Campaign name\",\"Ad set name\",\"Delivery status\",\"Delivery level\",Reach,Impressions,Frequency,\"Attribution setting\",\"Result Type\",Results,\"Amount spent (IDR)\",\"Cost per result\",Starts,Ends,\"Reporting starts\",\"Reporting ends\"\n\"20250430 bebas tes\",\"20250430 bebastes adset\",not_delivering,adset,127147,230805,1.81526108,\"7-day click or 1-day view\",\"Messaging conversations started\",71,2105500,29654.92957746,2025-04-30,Ongoing,2025-04-30,2025-05-26\n\"20250430 snbt\",\"20250430 snbt adset\",not_delivering,adset,108159,170764,1.57882377,\"7-day click or 1-day view\",\"Messaging conversations started\",82,1053350,12845.73170732,2025-04-30,Ongoing,2025-04-30,2025-05-26\n\"20250501 tanti\",\"20250501 tanti adset\",not_delivering,adset,62318,98107,1.57429635,\"7-day click or 1-day view\",\"Messaging conversations started\",125,682823,5462.584,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250430 ksk new1\",\"20250430 ksk new1 adset\",not_delivering,adset,51615,70840,1.37246924,\"7-day click or 1-day view\",\"Messaging conversations started\",99,517145,5223.68686869,2025-04-30,Ongoing,2025-04-30,2025-05-26\n\"20250501 RPL Gizi Traffict Karisidenan Pati – Copy\",\"20250501 Karisidenan Pati Traffic Adset\",not_delivering,adset,43002,54051,1.25694154,\"7-day click or 1-day view\",\"Messaging conversations started\",62,478796,7722.51612903,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250501 RPL Kep Traffict Karisidenan Pati – Copy\",\"20250501 Karisidenan Pati Traffic Adset\",not_delivering,adset,48949,70377,1.43776175,\"7-day click or 1-day view\",\"Messaging conversations started\",64,450490,7038.90625,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250501 beasiswa + potongan 2-3 juta Campaign\",\"20250501 beasiswa + pot 2-3juta\",not_delivering,adset,37122,47110,1.26905878,\"7-day click or 1-day view\",\"Messaging conversations started\",69,448445,6499.20289855,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250501 RPL Keb Traffict Karisidenan Pati – Copy\",\"20241225 Karisidenan Pati Traffic Adset\",not_delivering,adset,40794,49950,1.22444477,\"7-day click or 1-day view\",\"Messaging conversations started\",53,434803,8203.83018868,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250501  RPL Farmasi LJ – Copy\",\"20250501 RPL Farmasi LJ adset\",not_delivering,adset,231533,347429,1.50055932,\"7-day click or 1-day view\",Reach,231533,402459,1738.23601819,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250501 RPL TLM Traffict Karisidenan Pati – Copy\",\"20250501 Karisidenan Pati Traffic Adset\",not_delivering,adset,24923,33278,1.33523252,\"7-day click or 1-day view\",\"Messaging conversations started\",45,359050,7978.88888889,2025-05-01,Ongoing,2025-04-30,2025-05-26\n\"20250501 RPL Apoteker Traffict Karisidenan Pati – Copy\",\"20250501 Karisidenan Pati Traffic Adset\",not_delivering,adset,27760,39388,1.41887608,\"7-day click or 1-day view\",\"Messaging conversations started\",66,274347,4156.77272727,2025-05-01,Ongoing,2025-04-30,2025-05-26\n"};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
