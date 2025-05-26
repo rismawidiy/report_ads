@@ -34,6 +34,20 @@
       BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
     } = Recharts;
 
+    // Embedded CSV data
+    const csvData = `Campaign name,Ad set name,Delivery status,Delivery level,Reach,Impressions,Frequency,Attribution setting,Result Type,Results,Amount spent (IDR),Cost per result,Starts,Ends,Reporting starts,Reporting ends
+"20250430 bebas tes","20250430 bebastes adset","not_delivering","adset",127147,230805,1.81526108,"7-day click or 1-day view","Messaging conversations started",71,2105500,29654.92957746,"2025-04-30","Ongoing","2025-04-30","2025-05-26"
+"20250430 snbt","20250430 snbt adset","not_delivering","adset",108159,170764,1.57882377,"7-day click or 1-day view","Messaging conversations started",82,1053350,12845.73170732,"2025-04-30","Ongoing","2025-04-30","2025-05-26"
+"20250501 tanti","20250501 tanti adset","not_delivering","adset",62318,98107,1.57429635,"7-day click or 1-day view","Messaging conversations started",125,682823,5462.584,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250430 ksk new1","20250430 ksk new1 adset","not_delivering","adset",51615,70840,1.37246924,"7-day click or 1-day view","Messaging conversations started",99,517145,5223.68686869,"2025-04-30","Ongoing","2025-04-30","2025-05-26"
+"20250501 RPL Gizi Traffict Karisidenan Pati – Copy","20250501 Karisidenan Pati Traffic Adset","not_delivering","adset",43002,54051,1.25694154,"7-day click or 1-day view","Messaging conversations started",62,478796,7722.51612903,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250501 RPL Kep Traffict Karisidenan Pati – Copy","20250501 Karisidenan Pati Traffic Adset","not_delivering","adset",48949,70377,1.43776175,"7-day click or 1-day view","Messaging conversations started",64,450490,7038.90625,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250501 beasiswa + potongan 2-3 juta Campaign","20250501 beasiswa + pot 2-3juta","not_delivering","adset",37122,47110,1.26905878,"7-day click or 1-day view","Messaging conversations started",69,448445,6499.20289855,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250501 RPL Keb Traffict Karisidenan Pati – Copy","20241225 Karisidenan Pati Traffic Adset","not_delivering","adset",40794,49950,1.22444477,"7-day click or 1-day view","Messaging conversations started",53,434803,8203.83018868,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250501  RPL Farmasi LJ – Copy","20250501 RPL Farmasi LJ adset","not_delivering","adset",231533,347429,1.50055932,"7-day click or 1-day view","Reach",231533,402459,1738.23601819,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250501 RPL TLM Traffict Karisidenan Pati – Copy","20250501 Karisidenan Pati Traffic Adset","not_delivering","adset",24923,33278,1.33523252,"7-day click or 1-day view","Messaging conversations started",45,359050,7978.88888889,"2025-05-01","Ongoing","2025-04-30","2025-05-26"
+"20250501 RPL Apoteker Traffict Karisidenan Pati – Copy","20250501 Karisidenan Pati Traffic Adset","not_delivering","adset",27760,39388,1.41887608,"7-day click or 1-day view","Messaging conversations started",66,274347,4156.77272727,"2025-05-01","Ongoing","2025-04-30","2025-05-26"`;
+
     // Defining the Report component
     const Report = () => {
       const [data, setData] = useState([]);
@@ -41,8 +55,7 @@
 
       // Loading and processing CSV data
       useEffect(() => {
-        const csv = loadFileData("report-Apr-30-2025-to-May-26-2025.csv");
-        Papa.parse(csv, {
+        Papa.parse(csvData, {
           header: true,
           skipEmptyLines: true,
           dynamicTyping: false,
